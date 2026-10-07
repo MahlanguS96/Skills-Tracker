@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEMOSA - Palindrome Quiz</title>
+<style>
+  :root{--header-bg:#2b2b2b;--page-bg:#e8e8e8;--card-bg:#fff;--field-bg:#d9d9d9;--btn-bg:#1a1a1a;--btn-text:#fff;--radius:14px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;flex-direction:column;align-items:center;color:#fff;}
+  header{width:100%;background:var(--header-bg);color:#fff;display:flex;align-items:center;justify-content:center;padding:18px;position:relative;}
+  header h1{font-size:1.4rem;letter-spacing:2px;}
+  #userDisplay{position:absolute;right:12px;font-size:0.7rem;}
+  main{width:100%;max-width:480px;background:var(--card-bg);margin:20px auto;padding:20px 18px;box-shadow:0 2px 6px rgba(0,0,0,0.15);border-radius:14px;color:#1a1a1a;}
+  .panel{background:var(--field-bg);border-radius:14px;padding:16px 12px;min-height:300px;}
+  .btn{background:var(--btn-bg);color:var(--btn-text);border:none;border-radius:4px;padding:10px 18px;font-size:0.85rem;cursor:pointer;margin:4px;transition:all 0.2s;}
+  .btn:hover{opacity:0.85;transform:scale(1.02);}
+  .btn.start{background:#ffcc00;color:#333;font-weight:bold;width:100%;padding:14px;font-size:1rem;}
+  .btn.back{background:#6b6b6b;}
+  .answer-btn{display:block;width:100%;background:#fff;color:#333;border:2px solid #ddd;padding:12px;margin:6px 0;border-radius:8px;cursor:pointer;font-weight:600;transition:all 0.2s;}
+  .answer-btn:hover{background:#e0ecff;border-color:#2563eb;}
+  .stats{display:flex;justify-content:space-between;margin-bottom:12px;font-weight:700;}
+  .actions{display:flex;justify-content:space-between;margin-top:18px;}
+  footer{width:100%;max-width:480px;text-align:center;font-size:0.65rem;color:#fff;padding:8px 0 24px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>NEMOSA</h1>
+  <span id="userDisplay"></span>
+</header>
+
+<main>
+  <div class="panel">
+    <h3 style="text-align:center;margin-bottom:10px;">Palindrome Quiz - Squad 15</h3>
+    <div class="stats">
+      <h4 id="timer">Time: 60</h4>
+      <h4 id="score">Score: 0</h4>
+    </div>
+    <h3 id="question">Click Start Game to begin</h3>
+    <div id="answers" style="margin-top:14px;">
+      <button class="answer-btn" onclick="checkAnswer(0)">Answer 1</button>
+      <button class="answer-btn" onclick="checkAnswer(1)">Answer 2</button>
+      <button class="answer-btn" onclick="checkAnswer(2)">Answer 3</button>
+      <button class="answer-btn" onclick="checkAnswer(3)">Answer 4</button>
+    </div>
+    <p id="finalScore" style="text-align:center;margin-top:12px;font-weight:700;color:#2563eb;"></p>
+  </div>
+
+  <div class="actions">
+    <button class="btn back" onclick="goToLearnerDashboard()">← Back to Learner Dashboard</button>
+    <button class="btn start" onclick="startMiniGame()">Start Game</button>
+  </div>
+  <div style="font-size:0.7rem;color:#fff;background:rgba(0,0,0,0.2);padding:8px;border-radius:6px;margin-top:10px;">
+    <b>Controls:</b> Click answers or press keys 1-4. Score saves to Firebase users/{id}/scores + localStorage. DOM + Timer animation (setInterval).
+  </div>
+</main>
+
+<footer>All Rights Reserved NEMOSA 2026 | Game: Palindrome Quiz | DOM separated: HTML + palindrome.js</footer>
+
+<!-- SEPARATE JS - DOM, not inline -->
+<script type="module" src="palindrome.js"></script>
+</body>
+</html>
