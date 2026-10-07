@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEMOSA - Admin</title>
+<style>
+  :root{--header-bg:#2b2b2b;--page-bg:#e8e8e8;--card-bg:#fff;--field-bg:#d9d9d9;--btn-bg:#1a1a1a;--btn-text:#fff;--radius:14px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--page-bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  header{width:100%;background:var(--header-bg);color:#fff;display:flex;align-items:center;justify-content:center;padding:18px 16px;position:relative;}
+  header h1{font-size:1.4rem;letter-spacing:2px;}
+  main{width:100%;max-width:560px;background:var(--card-bg);margin:20px auto;padding:20px 18px;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+  .hidden{display:none!important;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .panel{background:var(--field-bg);border-radius:var(--radius);padding:16px 12px;min-height:40px;}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+  .field input, .field select{padding:8px;border:none;border-radius:6px;background:#fff;}
+  .btn{background:var(--btn-bg);color:var(--btn-text);border:none;border-radius:4px;padding:7px 14px;cursor:pointer;font-size:0.8rem;}
+  .actions{display:flex;justify-content:space-between;margin-top:18px;}
+  footer{width:100%;max-width:560px;text-align:center;font-size:0.65rem;color:#555;background:#d4d4d4;padding:8px 0 24px;}
+</style>
+</head>
+<body>
+<header><h1>NEMOSA - Admin Dashboard</h1><span id="userDisplay" style="position:absolute;right:12px;font-size:0.7rem;"></span></header>
+<main id="app">
+  <div class="grid-2">
+    <div>
+      <h3>Add Learner</h3>
+      <div class="panel">
+        <div class="field"><input id="adminStudentName" placeholder="Full Name"></div>
+        <div class="field"><input id="adminStudentId" placeholder="Learner ID (e.g. L001)"></div>
+        <div class="field"><select id="adminStudentRole"><option value="learner">Learner</option><option value="assessor">Assessor</option><option value="admin">Admin</option></select></div>
+        <div class="field"><label><input id="adminStudentActive" type="checkbox" checked> Active</label></div>
+        <button class="btn" onclick="addSchoolUser()">Save Learner</button>
+      </div>
+      <h3 style="margin-top:12px;">Add Staff</h3>
+      <div class="panel">
+        <div class="field"><input id="adminStaffName" placeholder="Staff Full Name"></div>
+        <div class="field"><input id="adminStaffId" placeholder="Staff ID (e.g. S001)"></div>
+        <div class="field"><select id="adminStaffRole"><option value="assessor">Assessor</option><option value="admin">Admin</option></select></div>
+        <div class="field"><label><input id="adminStaffActive" type="checkbox" checked> Active</label></div>
+        <button class="btn" onclick="addStaffMember()">Save Staff</button>
+      </div>
+    </div>
+    <div>
+      <h3>School Overview</h3>
+      <div class="panel">
+        <p id="adminTotalLearners">Total learners: 0</p>
+        <p id="adminTotalStaff">Total staff: 0</p>
+        <p id="adminCompletedLearners">Learners all tasks: 0</p>
+        <p id="adminActiveUsers">Active: 0</p>
+        <p id="adminAttendanceRate">Attendance: 0%</p>
+        <p id="adminAverageGrade">Avg: 0%</p>
+      </div>
+      <h3 style="margin-top:12px;">Registered Users</h3>
+      <div id="adminUsersList" class="panel"></div>
+      <h3 style="margin-top:12px;">Staff List</h3>
+      <div id="adminStaffList" class="panel"></div>
+      <h3 style="margin-top:12px;">Task Overview</h3>
+      <div id="adminTasksList" class="panel"></div>
+    </div>
+  </div>
+  <div class="actions"><button class="btn" onclick="logoutUser()">Logout</button><button class="btn" onclick="window.print()">Print Summary</button></div>
+</main>
+<footer>All Rights Reserved NEMOSA 2026</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

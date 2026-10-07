@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEMOSA - Assessor</title>
+<style>
+  :root{--header-bg:#2b2b2b;--page-bg:#e8e8e8;--card-bg:#fff;--field-bg:#d9d9d9;--btn-bg:#1a1a1a;--btn-text:#fff;--radius:14px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--page-bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  header{width:100%;background:var(--header-bg);color:#fff;display:flex;align-items:center;justify-content:center;padding:18px 16px;position:relative;}
+  main{width:100%;max-width:560px;background:var(--card-bg);margin:20px auto;padding:20px 18px;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+  .hidden{display:none!important;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .panel{background:var(--field-bg);border-radius:14px;padding:16px 12px;min-height:200px;}
+  .field input, .field select, .field textarea{width:100%;padding:8px;margin:4px 0;border:none;border-radius:6px;background:#fff;}
+  .btn{background:var(--btn-bg);color:var(--btn-text);border:none;border-radius:4px;padding:7px 14px;cursor:pointer;font-size:0.8rem;margin-top:6px;}
+  .actions{display:flex;justify-content:space-between;margin-top:18px;}
+  footer{width:100%;max-width:560px;text-align:center;font-size:0.65rem;color:#555;background:#d4d4d4;padding:8px 0 24px;}
+</style>
+</head>
+<body>
+<header><h1>NEMOSA - Assessor</h1><span id="userDisplay" style="position:absolute;right:12px;font-size:0.7rem;"></span></header>
+<main>
+  <div class="grid-2">
+    <div>
+      <h3>Add / Edit Task</h3>
+      <div class="panel">
+        <div class="field"><input id="taskTitle" placeholder="Task Title"></div>
+        <div class="field"><select id="taskType"><option value="Written">Written</option><option value="Practical">Practical</option><option value="Assignment">Assignment</option><option value="Test">Test</option></select></div>
+        <div class="field"><textarea id="taskDesc" placeholder="Instructions"></textarea></div>
+        <div class="field"><input id="dueDate" type="date"></div>
+        <div class="field"><input id="totalMarks" type="number" placeholder="Total Marks"></div>
+        <button id="addTaskBtn" class="btn" onclick="createTask()">Add Task</button>
+        <button id="cancelEditBtn" class="btn hidden" onclick="clearTaskForm()">Cancel Edit</button>
+        <h3 style="margin-top:12px;">Stats</h3>
+        <p id="totalTasks">Total Tasks: 0</p>
+        <p id="totalSubmissions">Total Submissions: 0</p>
+        <p id="avgResult">Average Result: -</p>
+      </div>
+    </div>
+    <div>
+      <h3>Allocate Marks</h3>
+      <div class="panel">
+        <div class="field"><select id="assessorLearnerSelect"><option value="">Select learner</option></select></div>
+        <div class="field"><select id="assessorTaskSelect"><option value="">Select task</option></select></div>
+        <div class="field"><input id="assessorMarks" type="number" min="0" max="100" placeholder="Marks 0-100"></div>
+        <div class="field"><textarea id="assessorFeedback" placeholder="Feedback"></textarea></div>
+        <button class="btn" onclick="saveAssessment()">Save Assessment</button>
+        <h3 style="margin-top:12px;">All Tasks</h3>
+        <div id="tasksList"></div>
+        <h3 style="margin-top:12px;">Submissions</h3>
+        <div id="submissionsList"></div>
+      </div>
+    </div>
+  </div>
+  <div class="actions"><button class="btn" onclick="logoutUser()">Logout</button><button class="btn" onclick="window.print()">Print</button></div>
+</main>
+<footer>All Rights Reserved NEMOSA 2026</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
